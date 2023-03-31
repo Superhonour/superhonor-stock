@@ -2,6 +2,7 @@ import akahare_module as am
 import datetime
 
 # 定义参数
+calc_date_str = '20230328'
 # 关注
 share_list = [{
     'name': '恺英网络',
@@ -20,16 +21,12 @@ def run():
     actual_data = am.stock_zh_a_spot_em()
     # print(actual_data)
     for i, share in enumerate(share_list):
-        cur_date_index = actual_data[(actual_data['代码'] == share['code'])].index.tolist()
-        data = actual_data.iloc[cur_date_index]
-        # data.set_index('最新价', inplace=True)
-        print(data['最新价'])
-        singleProcess(share, actual_data.iloc[cur_date_index])
+        cur_date_index = actual_data[(actual_data['代码'] == share['code'])]['最新价'].tolist()
+        singleProcess(share, cur_date_index[0])
 
 
-def singleProcess(share, cur_date):
+def singleProcess(share, cur_value):
     # 设定日期
-    calc_date_str = '20230328'
     calc_date = datetime.datetime.strptime(calc_date_str, "%Y%m%d")
     # 大周期天数
     parent_cyc_days = 60
@@ -70,7 +67,6 @@ def singleProcess(share, cur_date):
     share['parent_cyc_fall'] = parent_cyc_fall
 
     # TODO 当前价格
-    cur_value = 10
     share['cur_value'] = cur_value
 
     # 计算
@@ -94,7 +90,7 @@ def trade(share):
     # TODO 是否持仓
     hold_share_flag = False
     # TODO 计算费用
-    fee = 100
+    fee = calcFee()
     # 交易
     if hold_share_flag:
         if share['cur_value'] > share['sell_value_max'] or share['cur_value'] < share['sell_value_min']:
@@ -102,6 +98,10 @@ def trade(share):
     elif ~share['parent_cyc_fall']:
         if share['cur_value'] > share['buy_value_min'] and share['cur_value'] * share['income_ratio'] < (share['buy_value_max'] - fee):
             print("执行买入")
+
+
+def calcFee():
+    return 0
 
 
 if __name__ == "__main__":
