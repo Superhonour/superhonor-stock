@@ -16,3 +16,10 @@ def stock_zh_a_spot_em():
     实时行情数据-东财
     """
     return ak.stock_zh_a_spot_em()
+
+
+def stock_rank_xzjp_ths():
+    """
+    同花顺-数据中心-技术选股-险资举牌
+    """
+    return ak.stock_rank_xzjp_ths()
