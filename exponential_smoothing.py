@@ -30,7 +30,7 @@ def run(file_name, stock_name):
         s.append(s1)
     for i in range(0, len(list_a)):
         s_i = s[i]
-        print("%s:a=%s 一次指数平滑法的预测值为：%s,涨跌幅:%s" % (stock_name, list_a[i], s_i[len(s_i) - 1], calaRatio(s_i[len(s_i) - 1], counts[len(counts) - 1])))
+        # print("%s:a=%s 一次指数平滑法的预测值为：%s,涨跌幅:%s" % (stock_name, list_a[i], s_i[len(s_i) - 1], calaRatio(s_i[len(s_i) - 1], counts[len(counts) - 1])))
         # plt.plot(ids, s_i[1:], label='a = %s' % a, linewidth=1, linestyle=':', marker=',')
 
     # plt.show()
@@ -53,7 +53,8 @@ def run(file_name, stock_name):
         at = 2 * single[len(single) - 1] - twice[len(twice) - 1]
         bt = (list_a[i] / 1 - list_a[i]) / (single[len(single) - 1] - twice[len(twice) - 1])
         x = at + bt
-        print("%s:a=%s 二次指数平滑法的预测值为%s,涨跌幅:%s" % (stock_name, list_a[i], x, calaRatio(x, counts[len(counts) - 1])))
+        # print("%s:a=%s 二次指数平滑法的预测值为%s,涨跌幅:%s" % (stock_name, list_a[i], x, calaRatio(x, counts[len(counts) - 1])))
+    return x
 
 
 def calaRatio(forecast, perValue):
