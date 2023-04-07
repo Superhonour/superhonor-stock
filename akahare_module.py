@@ -32,3 +32,8 @@ def stock_rank_xzjp_ths():
     同花顺-数据中心-技术选股-险资举牌
     """
     return ak.stock_rank_xzjp_ths()
+
+
+if __name__ == "__main__":
+    df = stock_zh_a_hist_df('000900', '20230407', '20230407')
+    print(df)
